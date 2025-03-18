@@ -14,3 +14,4 @@ qa_data_final_with_scores.csv
 qa_data_final.csv
 qa.py
 rag_local.py
+__pycache__

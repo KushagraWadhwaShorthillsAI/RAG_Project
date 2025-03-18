@@ -1,0 +1,61 @@
+2025-03-18 15:27:50,685 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-03-18 15:27:54,824 - INFO - 2 prompts are loaded, with the keys: ['query', 'text']
+2025-03-18 15:28:23,586 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_0
+2025-03-18 15:28:23,586 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_1
+2025-03-18 15:28:23,586 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_2
+2025-03-18 15:28:23,586 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_3
+2025-03-18 15:28:23,587 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_4
+2025-03-18 15:28:23,587 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_5
+2025-03-18 15:28:23,587 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_0
+2025-03-18 15:28:23,587 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_1
+2025-03-18 15:28:23,587 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_2
+2025-03-18 15:28:23,587 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_3
+2025-03-18 15:28:23,587 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_4
+2025-03-18 15:28:23,587 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_5
+2025-03-18 15:28:23,587 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_6
+2025-03-18 15:28:23,588 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_7
+2025-03-18 15:28:25,879 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-03-18 15:28:30,861 - INFO - 2 prompts are loaded, with the keys: ['query', 'text']
+2025-03-18 15:28:37,515 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-03-18 15:28:42,023 - INFO - 2 prompts are loaded, with the keys: ['query', 'text']
+2025-03-18 15:29:51,280 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-03-18 15:30:07,943 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-03-18 15:30:12,969 - INFO - 2 prompts are loaded, with the keys: ['query', 'text']
+2025-03-18 15:30:19,125 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_0
+2025-03-18 15:30:19,125 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_1
+2025-03-18 15:30:19,125 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_2
+2025-03-18 15:30:19,125 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_3
+2025-03-18 15:30:19,126 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_4
+2025-03-18 15:30:19,126 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_5
+2025-03-18 15:30:19,127 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_0
+2025-03-18 15:30:19,127 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_1
+2025-03-18 15:30:19,127 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_2
+2025-03-18 15:30:19,127 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_3
+2025-03-18 15:30:19,127 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_4
+2025-03-18 15:30:19,127 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_5
+2025-03-18 15:30:19,127 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_6
+2025-03-18 15:30:19,127 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_7
+2025-03-18 15:30:21,801 - INFO - User Query: What is Python?
+2025-03-18 15:30:21,801 - INFO - Chatbot Response: Python is an easy-to-learn, powerful programming language with efficient high-level data structures and a simple, effective approach to object-oriented programming.  Its elegant syntax and dynamic typing, along with its interpreted nature, make it ideal for scripting and rapid application development across many areas and platforms.  It's a high-level, general-purpose language applicable to many problem types, and includes a large standard library covering areas like string processing, internet protocols, software engineering, and operating system interfaces.  Beyond object-oriented programming, it supports procedural and functional programming paradigms.  It's also an interpreted, interactive, object-oriented language incorporating modules, exceptions, dynamic typing, high-level dynamic data types, and classes.  It's extensible in C or C++, usable as an extension language for applications needing a programmable interface, and runs on many Unix variants, macOS, and Windows.
+
+2025-03-18 15:30:21,801 - INFO - --------------------------------------------------
+2025-03-18 15:30:30,113 - INFO - User Query: How to import modules in python?
+2025-03-18 15:30:30,114 - INFO - Chatbot Response: The provided text describes ways to locate and execute Python modules, including using the `runpy` module to run modules without importing them first, and mentions that the `importlib` module may be a more suitable alternative in some cases.  It also notes that there are modules that provide new ways to import other Python modules and hooks for customizing the import process, but doesn't detail how to perform the import itself.
+
+2025-03-18 15:30:30,114 - INFO - --------------------------------------------------
+2025-03-18 15:30:36,299 - INFO - User Query: What do you know about libraries in python?
+2025-03-18 15:30:36,299 - INFO - Chatbot Response: Python's standard library is extensive, providing many tools.  It includes built-in modules (written in C) that give access to system functions like file input/output, which would otherwise be unavailable to Python programmers.  It also contains modules written in Python that offer solutions to common programming problems.  Some modules are designed to improve the portability of Python programs by creating platform-neutral APIs.  The standard library is usually fully included in Windows installers, and often includes extra components.  On Unix-like systems, Python is typically a set of packages, so you might need to use the operating system's packaging tools to get optional components.  Beyond the standard library, there's a huge collection of additional components, from individual programs and modules to entire application frameworks, available from the Python Package Index.
+
+2025-03-18 15:30:36,299 - INFO - --------------------------------------------------
+2025-03-18 15:30:42,753 - INFO - User Query: Is a *.pyd file the same as a DLL?
+2025-03-18 15:30:42,753 - INFO - Chatbot Response: Yes,  *.pyd files are DLLs, but with some key differences.  A DLL named foo.pyd requires a PyInit_foo() function.  Python's import foo statement will search for foo.pyd (along with foo.py, foo.pyc), and if found, will attempt to call PyInit_foo() for initialization.  Unlike DLLs, you don't link your .exe with foo.lib; doing so would make the DLL's presence mandatory for Windows.  The search path for foo.pyd is PYTHONPATH, not Windows' DLL search path.  Also, foo.pyd isn't required to run the program, unlike a linked DLL.  However, foo.pyd is needed if you use import foo.  In DLLs, linkage is declared using __declspec(dllexport), while in .pyd files, it's defined in a function list.
+
+2025-03-18 15:30:42,753 - INFO - --------------------------------------------------
+2025-03-18 15:30:50,958 - INFO - User Query: What is Python?
+2025-03-18 15:30:50,958 - INFO - Chatbot Response: Python is an easy-to-learn, powerful programming language with efficient high-level data structures and a simple, effective approach to object-oriented programming.  Its elegant syntax and dynamic typing, along with its interpreted nature, make it ideal for scripting and rapid application development across many areas and platforms.  It's a high-level, general-purpose language applicable to many problem types, and includes a large standard library covering areas like string processing, internet protocols, software engineering, and operating system interfaces.  Beyond object-oriented programming, it supports procedural and functional programming paradigms.  It's also an interpreted, interactive, object-oriented language incorporating modules, exceptions, dynamic typing, high-level dynamic data types, and classes.  It's extensible in C or C++, usable as an extension language for applications needing a programmable interface, and runs on many Unix variants, macOS, and Windows.
+
+2025-03-18 15:30:50,959 - INFO - --------------------------------------------------
+2025-03-18 15:31:07,432 - INFO - User Query: do we have any gui toolkit in python
+2025-03-18 15:31:07,433 - INFO - Chatbot Response: Yes, Python includes tkinter, an object-oriented interface to the Tcl/Tk widget set.  Additionally, several other cross-platform and platform-specific GUI frameworks are available.
+
+2025-03-18 15:31:07,433 - INFO - --------------------------------------------------

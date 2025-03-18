@@ -9,8 +9,7 @@ load_dotenv()
 class Config:
     # Store multiple API keys from the .env file
     GEMINI_API_KEYS = [
-        os.getenv("GEMINI_API_KEY"),
-        os.getenv("GEMINI_API_KEY2"),
+
         os.getenv("GEMINI_API_KEY3"),
     ]
     DATA_DIR = "data_main"

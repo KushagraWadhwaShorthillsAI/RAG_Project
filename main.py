@@ -1,10 +1,14 @@
 import streamlit as st
+import logging
 from core.config import Config
 from core.indexer import IndexBuilder
 from core.retriever import RetrieverFactory
 from core.engine import QueryEngineBuilder
 from transformers import AutoTokenizer
 
+# Configure logging
+logging.basicConfig(filename="chatbot_logs.txt", level=logging.INFO, 
+                    format="%(asctime)s - %(levelname)s - %(message)s")
 
 def initialize_system():
     """Initialize the system by setting up models, indexes, and the query engine."""
@@ -39,16 +43,22 @@ def initialize_system():
 def safe_query(query):
     """Wrapper for query execution to catch 429 errors and retry with a fallback API key."""
     try:
-        return st.session_state.query_engine.query(query)
+        response = st.session_state.query_engine.query(query)
+        return response
     except Exception as e:
         error_message = str(e).lower()
         if "429" in error_message or "rate limit" in error_message:
             print("⚠️ 429 error encountered during query. Reinitializing with fallback API key...")
-            # Reinitialize the system (which will attempt to use the next available key)
             st.session_state.query_engine = initialize_system()
             if st.session_state.query_engine:
                 return st.session_state.query_engine.query(query)
-        raise e  # Reraise if it's not a rate limit issue
+        raise e
+
+def log_interaction(query, response):
+    """Logs chatbot interactions to a file."""
+    logging.info(f"User Query: {query}")
+    logging.info(f"Chatbot Response: {response}")
+    logging.info("-" * 50)
 
 def main():
     st.title("Chatbot")
@@ -69,19 +79,22 @@ def main():
         with st.spinner("🔎 Processing your query..."):
             try:
                 response = safe_query(query)
-
+                
                 if not response.source_nodes:
                     st.warning("⚠️ No relevant information found.")
                     return
-
+                
                 st.markdown("### 📖 Relevant Chunks Used:")
                 for i, node in enumerate(response.source_nodes):
                     st.markdown(f"**Chunk {i+1}:**\n> {node.text[:150]}...")
-
+                
                 response_text = response.response
                 st.write("📝 **Response:**")
                 st.write(response_text)
-
+                
+                # Log the interaction
+                log_interaction(query, response_text)
+                
             except Exception as e:
                 st.error(f"❌ Error processing query: {e}")
 
