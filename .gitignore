@@ -15,3 +15,6 @@ qa_data_final.csv
 qa.py
 rag_local.py
 __pycache__
+pythonfaq_answered.csv
+pythonfaq_answered_updated2.csv
+python_faqs - python_faqs.csv

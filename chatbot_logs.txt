@@ -59,3 +59,5 @@
 2025-03-18 15:31:07,433 - INFO - Chatbot Response: Yes, Python includes tkinter, an object-oriented interface to the Tcl/Tk widget set.  Additionally, several other cross-platform and platform-specific GUI frameworks are available.
 
 2025-03-18 15:31:07,433 - INFO - --------------------------------------------------
+2025-03-18 17:14:27,473 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-03-18 17:14:30,925 - INFO - 2 prompts are loaded, with the keys: ['query', 'text']

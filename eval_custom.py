@@ -1,81 +1,84 @@
 import pandas as pd
-from sklearn.metrics.pairwise import cosine_similarity
-from transformers import AutoTokenizer, AutoModel
 import torch
 import numpy as np
-from sklearn.metrics import f1_score
+import spacy
+import nltk
+from sklearn.metrics.pairwise import cosine_similarity
+from transformers import AutoTokenizer, AutoModel, pipeline
+from sentence_transformers import SentenceTransformer
+from rouge_score import rouge_scorer
+from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 
-# Step 1: Load your Excel sheet
-df = pd.read_csv("output_answers_updated.csv")
+# Download NLTK dependencies
+nltk.download("punkt")
 
-# Step 2: Define a function to compute retrieval relevance using Cosine Similarity
+# Load pre-trained models
+sentence_model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+nlp = spacy.load("en_core_web_sm")
+consistency_checker = pipeline("text-classification", model="facebook/bart-large-mnli")
+scorer = rouge_scorer.RougeScorer(["rougeL"], use_stemmer=True)
+
+# Step 1: Load dataset
+df = pd.read_csv("output_answered_updated2.csv" )
+
+# Step 2: Compute Retrieval Relevance
 def compute_retrieval_relevance(query, retrieved_chunks):
-    """
-    Compute the relevance between the query and retrieved context using Cosine Similarity.
-    """
-    # Check if retrieved_chunks is a valid string
     if not isinstance(retrieved_chunks, str) or not retrieved_chunks.strip():
-        return 0.0  # Return 0 relevance for invalid or empty context
+        return 0.0 
 
-    # Load a pre-trained sentence transformer model (e.g., BERT)
-    tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
-    model = AutoModel.from_pretrained("bert-base-uncased")
+    query_embedding = sentence_model.encode(query, convert_to_tensor=True)
+    context_embedding = sentence_model.encode(retrieved_chunks, convert_to_tensor=True)
 
-    # Tokenize and encode the query and context
-    # Tokenize and encode the query and context with truncation enabled
-    query_embedding = model(**tokenizer(query, return_tensors="pt", truncation=True, max_length=512)).last_hidden_state.mean(dim=1)
-    context_embedding = model(**tokenizer(retrieved_chunks, return_tensors="pt", truncation=True, max_length=512)).last_hidden_state.mean(dim=1)
+    similarity = torch.nn.functional.cosine_similarity(query_embedding, context_embedding, dim=0)
+    return similarity.item()
 
+# Step 3: Compute Mean Reciprocal Rank (MRR)
+def mean_reciprocal_rank(relevant_indices):
+    if not relevant_indices:
+        return 0.0
+    return sum(1.0 / (rank + 1) for rank in relevant_indices) / len(relevant_indices)
 
-    # Compute cosine similarity
-    similarity = cosine_similarity(query_embedding.detach().numpy(), context_embedding.detach().numpy())
-    return similarity[0][0]
+# Step 4: Compute Recall@K
+def recall_at_k(relevant_docs, retrieved_docs, k=5):
+    retrieved_top_k = retrieved_docs[:k]
+    return len(set(relevant_docs) & set(retrieved_top_k)) / len(relevant_docs) if relevant_docs else 0.0
 
-# Step 3: Define a function to compute answer correctness using F1 Score
+# Step 5: Compute Answer Correctness (ROUGE-L)
 def compute_answer_correctness(llm_answer, expected_answer):
-    """
-    Compute the F1 score between the LLM's answer and the expected answer.
-    """
-    # Check if llm_answer and expected_answer are valid strings
     if not isinstance(llm_answer, str) or not isinstance(expected_answer, str):
-        return 0.0  # Return 0 correctness for invalid or empty answers
+        return 0.0
+    scores = scorer.score(expected_answer, llm_answer)
+    return scores["rougeL"].fmeasure
 
-    # Tokenize the answers
-    llm_tokens = set(llm_answer.lower().split())
-    expected_tokens = set(expected_answer.lower().split())
+# Step 6: Compute BLEU Score
+def compute_bleu_score(llm_answer, expected_answer):
+    if not isinstance(llm_answer, str) or not isinstance(expected_answer, str):
+        return 0.0
+    reference = [expected_answer.split()]
+    hypothesis = llm_answer.split()
+    smoothing = SmoothingFunction().method1
+    return sentence_bleu(reference, hypothesis, smoothing_function=smoothing)
 
-    # Compute F1 score
-    common_tokens = llm_tokens.intersection(expected_tokens)
-    precision = len(common_tokens) / len(llm_tokens) if len(llm_tokens) > 0 else 0
-    recall = len(common_tokens) / len(expected_tokens) if len(expected_tokens) > 0 else 0
-    f1 = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
-    return f1
-
-# Step 4: Define a function to detect hallucinations
+# Step 7: Detect Hallucinations (Named Entity Overlap)
 def detect_hallucination(llm_answer, retrieved_chunks):
-    """
-    Detect if the LLM's answer contains information not supported by the retrieved context.
-    """
-    # Check if llm_answer and retrieved_chunks are valid strings
-    if not isinstance(llm_answer, str) or not isinstance(retrieved_chunks, str):
-        return False  # Return False for invalid or empty inputs
+    answer_entities = {ent.text.lower() for ent in nlp(llm_answer).ents}
+    context_entities = {ent.text.lower() for ent in nlp(retrieved_chunks).ents}
+    hallucinated_entities = answer_entities - context_entities
+    return len(hallucinated_entities) > 0, hallucinated_entities
 
-    # Tokenize the LLM answer and context
-    llm_tokens = set(llm_answer.lower().split())
-    context_tokens = set(retrieved_chunks.lower().split())
+# Step 8: Detect Hallucinations using LLM Consistency Check
+def detect_hallucination_with_llm(llm_answer, retrieved_chunks):
+    result = consistency_checker(f"Context: {retrieved_chunks}\nAnswer: {llm_answer}")
+    return result[0]["label"] == "contradiction"
 
-    # Check if any tokens in the LLM answer are not in the context
-    hallucinated_tokens = llm_tokens - context_tokens
-    return len(hallucinated_tokens) > 0  # True if hallucination is detected
-
-# Step 5: Evaluate the RAG pipeline and store results
+# Step 9: Evaluate the RAG pipeline and store results
 results = []
 
 for _, row in df.iterrows():
-    question = row["question"]
-    retrieved_chunks = row["retrieved_chunks"]
-    llm_answer = row["llm_answer"]
-    expected_answer = row["expected_answer"]
+    question = str(row["question"]) if pd.notna(row["question"]) else ""
+    retrieved_chunks = str(row["retrieved_chunks"]) if pd.notna(row["retrieved_chunks"]) else ""
+    llm_answer = str(row["llm_answer"]) if pd.notna(row["llm_answer"]) else ""
+    expected_answer = str(row["expected_answer"]) if pd.notna(row["expected_answer"]) else ""
 
     # Compute retrieval relevance
     retrieval_score = compute_retrieval_relevance(question, retrieved_chunks)
@@ -83,10 +86,24 @@ for _, row in df.iterrows():
     # Compute answer correctness
     correctness_score = compute_answer_correctness(llm_answer, expected_answer)
 
-    # Detect hallucinations
-    hallucination_flag = detect_hallucination(llm_answer, retrieved_chunks)
+    # Compute BLEU Score
+    bleu_score = compute_bleu_score(llm_answer, expected_answer)
 
-    # Append results to the list
+    # Compute Recall@K (for now, we assume relevant_docs are expected_answers)
+    relevant_docs = [expected_answer] if expected_answer else []
+    retrieved_docs = [retrieved_chunks] if retrieved_chunks else []
+    recall_k_score = recall_at_k(relevant_docs, retrieved_docs, k=5)
+
+    # Compute MRR (assuming expected_answer as the relevant doc)
+    mrr_score = mean_reciprocal_rank([retrieved_docs.index(expected_answer)] if expected_answer in retrieved_docs else [])
+
+    # Detect hallucinations (NER-based)
+    hallucination_flag, hallucinated_entities = detect_hallucination(llm_answer, retrieved_chunks)
+
+    # Detect hallucinations (LLM-based)
+    hallucination_llm_flag = detect_hallucination_with_llm(llm_answer, retrieved_chunks)
+
+    # Append results to list
     results.append({
         "question": question,
         "retrieved_chunks": retrieved_chunks,
@@ -94,18 +111,32 @@ for _, row in df.iterrows():
         "expected_answer": expected_answer,
         "retrieval_relevance_score": retrieval_score,
         "answer_correctness_score": correctness_score,
+        "bleu_score": bleu_score,
+        "recall_at_k": recall_k_score,
+        "mrr_score": mrr_score,
         "hallucination_flag": hallucination_flag,
+        "hallucinated_entities": ", ".join(hallucinated_entities),
+        "hallucination_llm_flag": hallucination_llm_flag,
     })
 
-# Step 6: Convert results to a DataFrame and save to CSV
+# Step 10: Convert results to DataFrame and save to CSV
 results_df = pd.DataFrame(results)
 results_df.to_csv("evaluated_output.csv", index=False)
 
-# Step 7: Aggregate results for final scores
+# Step 11: Aggregate results for final scores
 avg_retrieval_score = results_df["retrieval_relevance_score"].mean()
 avg_correctness_score = results_df["answer_correctness_score"].mean()
+avg_bleu_score = results_df["bleu_score"].mean()
+avg_recall_at_k = results_df["recall_at_k"].mean()
+avg_mrr_score = results_df["mrr_score"].mean()
 hallucination_rate = results_df["hallucination_flag"].mean()
+hallucination_llm_rate = results_df["hallucination_llm_flag"].mean()
 
-print(f"Average Retrieval Relevance Score: {avg_retrieval_score:.2f}")
-print(f"Average Answer Correctness Score: {avg_correctness_score:.2f}")
-print(f"Hallucination Rate: {hallucination_rate:.2f}")
+# Print Final Scores
+print(f"🔹 Average Retrieval Relevance Score: {avg_retrieval_score:.2f}")
+print(f"🔹 Mean Reciprocal Rank (MRR): {avg_mrr_score:.2f}")
+print(f"🔹 Average Answer Correctness Score (ROUGE-L): {avg_correctness_score:.2f}")
+print(f"🔹 Average BLEU Score: {avg_bleu_score:.2f}")
+print(f"🔹 Average Recall@K (k=5): {avg_recall_at_k:.2f}")
+print(f"🔹 Hallucination Rate (NER-based): {hallucination_rate:.2f}")
+print(f"🔹 Hallucination Rate (LLM-based): {hallucination_llm_rate:.2f}")

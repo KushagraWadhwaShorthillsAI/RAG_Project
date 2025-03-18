@@ -10,7 +10,7 @@ class Config:
     # Store multiple API keys from the .env file
     GEMINI_API_KEYS = [
 
-        os.getenv("GEMINI_API_KEY3"),
+        os.getenv("GEMINI_API_KEY3")
     ]
     DATA_DIR = "data_main"
     CHUNK_SIZE = 512  # Optimized chunk size for better context preservation
