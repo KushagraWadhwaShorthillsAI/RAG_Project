@@ -145,8 +145,18 @@ The raw `python_docs.txt` is converted to structured JSON format for ingestion:
   - Filter out low-quality questions.
 
 **Prompt for QA Generation**:
-```
-Your task is to write a factoid question and an answer given a context...
+```QA_generation_prompt = """
+Your task is to write a factoid question and an answer given a context.
+Your factoid question should be answerable with a specific, concise piece of factual information from the context.
+Your factoid question should be formulated in the same style as questions users could ask in a search engine.
+This means that your factoid question MUST NOT mention something like "according to the passage" or "context".
+
+Provide your answer as follows:
+
+Output:::
+Factoid question: (your factoid question)
+Answer: (your answer to the factoid question)
+
 ```
 
 ### Scoring Mechanism  
@@ -171,29 +181,30 @@ def compute_retrieval_relevance(query, retrieved_chunks):
     # Uses BERT to compute embeddings
     # Applies cosine similarity
 ```
-Evaluation Metrics
+#
 
-Retrieval Relevance Score (Cosine Similarity) – Measures how relevant the retrieved chunks are to the query.
+### Evaluation Metrics
 
-Answer Correctness Score (F1 Score) – Compares the LLM's answer with the expected answer.
+1. **Retrieval Relevance Score (Cosine Similarity)** – Measures how relevant the retrieved chunks are to the query.
+2. **Answer Correctness Score (F1 Score)** – Compares the LLM's answer with the expected answer.
+3. **Hallucination Detection** – Flags if the LLM generates information not found in the retrieved chunks.
 
-Hallucination Detection – Flags if the LLM generates information not found in the retrieved chunks.
+### Code Implementation
 
-Code Implementation
+- **Retrieval Relevance**: Uses BERT embeddings and cosine similarity to compare user query with retrieved context.
+- **Answer Correctness**: Calculates F1-score based on word overlap between the expected and generated answer.
+- **Hallucination Detection**: Compares generated answers with retrieved chunks, flagging extra words.
 
-Retrieval Relevance: Uses BERT embeddings and cosine similarity to compare user query with retrieved context.
-
-Answer Correctness: Calculates F1-score based on word overlap between the expected and generated answer.
-
-Hallucination Detection: Compares generated answers with retrieved chunks, flagging extra words.
-
+```python
 def compute_retrieval_relevance(query, retrieved_chunks):
     tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
     model = AutoModel.from_pretrained("bert-base-uncased")
     query_embedding = model(**tokenizer(query, return_tensors="pt")).last_hidden_state.mean(dim=1)
     context_embedding = model(**tokenizer(retrieved_chunks, return_tensors="pt")).last_hidden_state.mean(dim=1)
     return cosine_similarity(query_embedding.detach().numpy(), context_embedding.detach().numpy())[0][0]
+```
 
+```python
 def compute_answer_correctness(llm_answer, expected_answer):
     llm_tokens = set(llm_answer.lower().split())
     expected_tokens = set(expected_answer.lower().split())
@@ -201,12 +212,13 @@ def compute_answer_correctness(llm_answer, expected_answer):
     precision = len(common_tokens) / len(llm_tokens) if llm_tokens else 0
     recall = len(common_tokens) / len(expected_tokens) if expected_tokens else 0
     return 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
+```
 
+```python
 def detect_hallucination(llm_answer, retrieved_chunks):
     return len(set(llm_answer.lower().split()) - set(retrieved_chunks.lower().split())) > 0
+```
 
-This ensures high-quality retrieval, accurate responses, and reduced hallucinations in RAG outputs.
----
 
 ## 7. Configuration Details  
 ```python
