@@ -146,8 +146,12 @@ The raw `python_docs.txt` is converted to structured JSON format for ingestion:
   - Evaluate groundedness and relevance.
   - Filter out low-quality questions.
 
+#
+
 **Prompt for QA Generation**:
-```QA_generation_prompt = """
+
+```
+QA_generation_prompt = """
 Your task is to write a factoid question and an answer given a context.
 Your factoid question should be answerable with a specific, concise piece of factual information from the context.
 Your factoid question should be formulated in the same style as questions users could ask in a search engine.
@@ -159,18 +163,62 @@ Output:::
 Factoid question: (your factoid question)
 Answer: (your answer to the factoid question)
 
+Now here is the context.
+
+Context: {context}\n
+Output:::"""
+
 ```
 
-### Scoring Mechanism  
-| Metric                     | Description |
-|----------------------------|-------------|
-| Groundedness Score         | Measures how well the generated question is grounded in the provided context. |
-| Relevance Score           | Assesses how relevant the question is to the topic. |
+### Scoring Mechanism
+
+| Metric             | Description                                                                   |
+| ------------------ | ----------------------------------------------------------------------------- |
+| Groundedness Score | Measures how well the generated question is grounded in the provided context. |
+| Relevance Score    | Assesses how relevant the question is to the topic.                           |
 
 **Evaluation Prompts for Scoring**:
+
 ```
-You will be given a context and a question. Your task is to rate groundedness...
+question_groundedness_critique_prompt = """
+You will be given a context and a question.
+Your task is to provide a 'total rating' scoring how well one can answer the given question unambiguously with the given context.
+Give your answer on a scale of 1 to 5, where 1 means that the question is not answerable at all given the context, and 5 means that the question is clearly and unambiguously answerable with the context.
+
+Provide your answer as follows:
+
+Answer:::
+Evaluation: (your rationale for the rating, as a text)
+Total rating: (your rating, as a number between 1 and 5)
+
+You MUST provide values for 'Evaluation:' and 'Total rating:' in your answer.
+
+Now here are the question and context.
+
+Question: {question}\n
+Context: {context}\n
+Answer::: """
+
+question_relevance_critique_prompt = """
+You will be given a question.
+Your task is to provide a 'total rating' representing how useful this question can be to python developers building python applications.
+Give your answer on a scale of 1 to 5, where 1 means that the question is not useful at all, and 5 means that the question is extremely useful.
+
+Provide your answer as follows:
+
+Answer:::
+Evaluation: (your rationale for the rating, as a text)
+Total rating: (your rating, as a number between 1 and 5)
+
+You MUST provide values for 'Evaluation:' and 'Total rating:' in your answer.
+
+Now here is the question.
+
+Question: {question}\n
+Answer::: """
+
 ```
+
 
 ### Performance Metrics  
 1. **Retrieval Relevance Score (Cosine Similarity)** – Measures how relevant the retrieved chunks are to the query.
