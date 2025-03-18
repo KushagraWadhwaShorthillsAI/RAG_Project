@@ -1,0 +1,16 @@
+chroma_db
+penv
+ragaenv
+.env
+eval_phoenix.py
+eval_r.py
+eval.ipynb
+main2.py
+main3.py
+cleaned_output.csv
+output_answers.csv
+python_faqs.csv
+qa_data_final_with_scores.csv
+qa_data_final.csv
+qa.py
+rag_local.py
