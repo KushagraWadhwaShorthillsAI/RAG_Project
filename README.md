@@ -98,6 +98,8 @@ The raw `python_docs.txt` is converted to structured JSON format for ingestion:
 │   └── python_docs.json 🗄️ Processed documentation
 └── chroma_db/           🧠 Vector database storage
 └── eval_custom.py       📊 Evaluates RAG pipeline output
+└── chatbot_logs.txt       Log files
+└── evaluated_output.csv   Final evaluated csv sheet
 ```
 
 ---
