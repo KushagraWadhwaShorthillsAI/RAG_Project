@@ -92,10 +92,6 @@ for _, row in df.iterrows():
     # Compute Recall@K (for now, we assume relevant_docs are expected_answers)
     relevant_docs = [expected_answer] if expected_answer else []
     retrieved_docs = [retrieved_chunks] if retrieved_chunks else []
-    recall_k_score = recall_at_k(relevant_docs, retrieved_docs, k=5)
-
-    # Compute MRR (assuming expected_answer as the relevant doc)
-    mrr_score = mean_reciprocal_rank([retrieved_docs.index(expected_answer)] if expected_answer in retrieved_docs else [])
 
     # Detect hallucinations (NER-based)
     hallucination_flag, hallucinated_entities = detect_hallucination(llm_answer, retrieved_chunks)
@@ -112,8 +108,6 @@ for _, row in df.iterrows():
         "retrieval_relevance_score": retrieval_score,
         "answer_correctness_score": correctness_score,
         "bleu_score": bleu_score,
-        "recall_at_k": recall_k_score,
-        "mrr_score": mrr_score,
         "hallucination_flag": hallucination_flag,
         "hallucinated_entities": ", ".join(hallucinated_entities),
         "hallucination_llm_flag": hallucination_llm_flag,
@@ -127,16 +121,12 @@ results_df.to_csv("evaluated_output.csv", index=False)
 avg_retrieval_score = results_df["retrieval_relevance_score"].mean()
 avg_correctness_score = results_df["answer_correctness_score"].mean()
 avg_bleu_score = results_df["bleu_score"].mean()
-avg_recall_at_k = results_df["recall_at_k"].mean()
-avg_mrr_score = results_df["mrr_score"].mean()
 hallucination_rate = results_df["hallucination_flag"].mean()
 hallucination_llm_rate = results_df["hallucination_llm_flag"].mean()
 
 # Print Final Scores
 print(f"🔹 Average Retrieval Relevance Score: {avg_retrieval_score:.2f}")
-print(f"🔹 Mean Reciprocal Rank (MRR): {avg_mrr_score:.2f}")
 print(f"🔹 Average Answer Correctness Score (ROUGE-L): {avg_correctness_score:.2f}")
 print(f"🔹 Average BLEU Score: {avg_bleu_score:.2f}")
-print(f"🔹 Average Recall@K (k=5): {avg_recall_at_k:.2f}")
 print(f"🔹 Hallucination Rate (NER-based): {hallucination_rate:.2f}")
 print(f"🔹 Hallucination Rate (LLM-based): {hallucination_llm_rate:.2f}")

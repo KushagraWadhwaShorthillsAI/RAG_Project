@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
-from llama_index.llms.gemini import Gemini  # Keep Gemini for LLM
+from llama_index.llms.gemini import Gemini  
 from llama_index.core import Settings
 
 load_dotenv()

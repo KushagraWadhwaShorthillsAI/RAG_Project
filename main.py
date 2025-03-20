@@ -11,8 +11,7 @@ logging.basicConfig(filename="chatbot_logs.txt", level=logging.INFO,
                     format="%(asctime)s - %(levelname)s - %(message)s")
 
 def initialize_system():
-    """Initialize the system by setting up models, indexes, and the query engine."""
-    print("\n🚀 Initializing System...\n")
+    st.toast("🚀 Initializing System...")
     config = Config()
     models = config.initialize_models()
     
@@ -20,7 +19,7 @@ def initialize_system():
         st.error("❌ Failed to initialize models. Check API keys and settings.")
         return None
 
-    with st.spinner("📄 Loading and indexing documents..."):
+    with st.spinner("📄 Loading and indexing documents... This may take a while."):
         index_builder = IndexBuilder(config)
         documents, file_hash = index_builder.load_documents()
         index = index_builder.build_indexes(documents, file_hash)
@@ -37,35 +36,39 @@ def initialize_system():
         engine_builder = QueryEngineBuilder(config)
         query_engine = engine_builder.build_engine(retriever)
 
-    print("✅ System Ready!\n")
+    st.toast("✅ System Ready!")
     return query_engine
 
 def safe_query(query):
-    """Wrapper for query execution to catch 429 errors and retry with a fallback API key."""
     try:
         response = st.session_state.query_engine.query(query)
         return response
     except Exception as e:
         error_message = str(e).lower()
         if "429" in error_message or "rate limit" in error_message:
-            print("⚠️ 429 error encountered during query. Reinitializing with fallback API key...")
+            st.warning("⚠️ Rate limit hit. Retrying with fallback API key...")
             st.session_state.query_engine = initialize_system()
             if st.session_state.query_engine:
                 return st.session_state.query_engine.query(query)
         raise e
 
 def log_interaction(query, response):
-    """Logs chatbot interactions to a file."""
     logging.info(f"User Query: {query}")
     logging.info(f"Chatbot Response: {response}")
     logging.info("-" * 50)
+    
+    # Store interactions in session state
+    if 'chat_history' not in st.session_state:
+        st.session_state.chat_history = []
+    st.session_state.chat_history.append({"question": query, "answer": response})
 
 def main():
-    st.title("Chatbot")
-    st.write("Ask me questions!")
+    st.set_page_config(page_title="Smart Chatbot", page_icon="🤖")
+    st.title("💬 AI-Powered Chatbot")
+    st.write("Ask me anything! I'm here to help.")
 
     if 'query_engine' not in st.session_state:
-        with st.spinner("⚡ Initializing system... Please wait..."):
+        with st.spinner("⚡ Initializing system... Please wait."):
             st.session_state.query_engine = initialize_system()
         
         if not st.session_state.query_engine:
@@ -74,29 +77,34 @@ def main():
         
         st.success("✅ System ready!")
 
-    query = st.text_input("Enter your question:")
+    st.divider()
+    query = st.text_input("💡 Enter your question:")
     if query:
         with st.spinner("🔎 Processing your query..."):
             try:
                 response = safe_query(query)
-                
+
                 if not response.source_nodes:
                     st.warning("⚠️ No relevant information found.")
                     return
-                
-                st.markdown("### 📖 Relevant Chunks Used:")
-                for i, node in enumerate(response.source_nodes):
-                    st.markdown(f"**Chunk {i+1}:**\n> {node.text[:150]}...")
-                
+
                 response_text = response.response
                 st.write("📝 **Response:**")
-                st.write(response_text)
+                st.success(response_text)
                 
-                # Log the interaction
                 log_interaction(query, response_text)
-                
+
             except Exception as e:
                 st.error(f"❌ Error processing query: {e}")
+    
+    # Display chat history
+    if 'chat_history' in st.session_state and st.session_state.chat_history:
+        st.divider()
+        st.write("🗂️ **Chat History:**")
+        for chat in st.session_state.chat_history[::-1]:
+            st.write(f"**Q:** {chat['question']}")
+            st.write(f"**A:** {chat['answer']}")
+            st.divider()
 
 if __name__ == "__main__":
     main()

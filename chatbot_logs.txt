@@ -61,3 +61,91 @@
 2025-03-18 15:31:07,433 - INFO - --------------------------------------------------
 2025-03-18 17:14:27,473 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
 2025-03-18 17:14:30,925 - INFO - 2 prompts are loaded, with the keys: ['query', 'text']
+2025-03-20 11:51:55,583 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-03-20 11:52:44,617 - INFO - 2 prompts are loaded, with the keys: ['query', 'text']
+2025-03-20 11:53:10,279 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_0
+2025-03-20 11:53:10,280 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_1
+2025-03-20 11:53:10,280 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_2
+2025-03-20 11:53:10,280 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_3
+2025-03-20 11:53:10,280 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_4
+2025-03-20 11:53:10,280 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_5
+2025-03-20 11:53:10,280 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_0
+2025-03-20 11:53:10,280 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_1
+2025-03-20 11:53:10,280 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_2
+2025-03-20 11:53:10,281 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_3
+2025-03-20 11:53:10,281 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_4
+2025-03-20 11:53:10,282 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_5
+2025-03-20 11:53:10,282 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_6
+2025-03-20 11:53:10,282 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_7
+2025-03-20 11:53:20,812 - INFO - User Query: Is a *.pyd file the same as a DLL?
+2025-03-20 11:53:20,812 - INFO - Chatbot Response: They are similar, but not identical.  A `.pyd` file is a DLL, but it must contain a specific initialization function and uses a different search path than standard DLLs.  Also, a `.pyd` file is not required for program execution, unlike a DLL linked to an executable.
+
+2025-03-20 11:53:20,813 - INFO - --------------------------------------------------
+2025-03-20 11:53:57,829 - INFO - User Query: what are the datatypes in python?
+2025-03-20 11:53:57,829 - INFO - Chatbot Response: Python offers several built-in data types including dictionaries, lists, sets, frozen sets, and tuples.  The `str` class handles Unicode strings, while `bytes` and `bytearray` classes manage binary data.  Additionally, there are specialized data types for dates and times, fixed-type arrays, heap queues, double-ended queues, and enumerations.  Lists are versatile compound data types that can group other values; they can contain items of different types, but often items share the same type.  Lists are mutable, unlike immutable strings.  Arrays are sequence types similar to lists, but with constrained object types specified during creation using a type code.
+
+2025-03-20 11:53:57,829 - INFO - --------------------------------------------------
+2025-03-20 11:54:27,157 - INFO - User Query: Is python an object oriented language- yes or no?
+2025-03-20 11:54:27,158 - INFO - Chatbot Response: Yes
+
+2025-03-20 11:54:27,158 - INFO - --------------------------------------------------
+2025-03-20 11:56:27,024 - INFO - User Query: What is 2+2
+2025-03-20 11:56:27,025 - INFO - Chatbot Response: The provided text focuses on Python programming and does not contain the answer to 2+2.
+
+2025-03-20 11:56:27,026 - INFO - --------------------------------------------------
+2025-03-20 15:32:15,875 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-03-20 15:32:19,864 - INFO - 2 prompts are loaded, with the keys: ['query', 'text']
+2025-03-20 15:32:28,562 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_0
+2025-03-20 15:32:28,563 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_1
+2025-03-20 15:32:28,563 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_2
+2025-03-20 15:32:28,563 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_3
+2025-03-20 15:32:28,563 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_4
+2025-03-20 15:32:28,563 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_5
+2025-03-20 15:32:28,563 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_0
+2025-03-20 15:32:28,563 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_1
+2025-03-20 15:32:28,563 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_2
+2025-03-20 15:32:28,563 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_3
+2025-03-20 15:32:28,563 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_4
+2025-03-20 15:32:28,564 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_5
+2025-03-20 15:32:28,564 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_6
+2025-03-20 15:32:28,564 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_7
+2025-03-20 15:32:32,045 - INFO - User Query: What is Python?
+2025-03-20 15:32:32,046 - INFO - Chatbot Response: Python is an easy-to-learn, powerful programming language with efficient high-level data structures and a simple, effective approach to object-oriented programming.  Its elegant syntax and dynamic typing, along with its interpreted nature, make it ideal for scripting and rapid application development across many areas and platforms.  It's a high-level, general-purpose language applicable to many problem types, and includes a large standard library covering areas like string processing, internet protocols, software engineering, and operating system interfaces.  Beyond object-oriented programming, it supports procedural and functional programming paradigms.  It's also an interpreted, interactive, object-oriented language incorporating modules, exceptions, dynamic typing, high-level dynamic data types, and classes.  It's extensible in C or C++, usable as an extension language for applications needing a programmable interface, and runs on many Unix variants, macOS, and Windows.
+
+2025-03-20 15:32:32,046 - INFO - --------------------------------------------------
+2025-03-20 15:35:18,050 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-03-20 15:35:21,283 - INFO - 2 prompts are loaded, with the keys: ['query', 'text']
+2025-03-20 15:35:35,682 - INFO - User Query: What is Python?
+2025-03-20 15:35:35,683 - INFO - Chatbot Response: Python is an easy-to-learn, powerful programming language with efficient high-level data structures and a simple, effective approach to object-oriented programming.  Its elegant syntax and dynamic typing, along with its interpreted nature, make it ideal for scripting and rapid application development across many areas and platforms.  It's a high-level, general-purpose language applicable to many problem types, and includes a large standard library covering areas like string processing, internet protocols, software engineering, and operating system interfaces.  Beyond object-oriented programming, it supports procedural and functional programming paradigms.  It's also an interpreted, interactive, object-oriented language incorporating modules, exceptions, dynamic typing, high-level dynamic data types, and classes.  It's extensible in C or C++, usable as an extension language for applications needing a programmable interface, and runs on many Unix variants, macOS, and Windows.
+
+2025-03-20 15:35:35,683 - INFO - --------------------------------------------------
+2025-03-20 15:36:53,134 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-03-20 15:36:55,929 - INFO - 2 prompts are loaded, with the keys: ['query', 'text']
+2025-03-20 15:37:02,721 - INFO - User Query: What is Python?
+2025-03-20 15:37:02,721 - INFO - Chatbot Response: Python is an easy-to-learn, powerful programming language with efficient high-level data structures and a simple, effective approach to object-oriented programming.  Its elegant syntax and dynamic typing, along with its interpreted nature, make it ideal for scripting and rapid application development across many areas and platforms.  It's a high-level, general-purpose language applicable to many problem types, and includes a large standard library covering areas like string processing, internet protocols, software engineering, and operating system interfaces.  Beyond object-oriented programming, it supports procedural and functional programming paradigms.  It's also an interpreted, interactive, object-oriented language incorporating modules, exceptions, dynamic typing, high-level dynamic data types, and classes.  It's extensible in C or C++, usable as an extension language for applications needing a programmable interface, and runs on many Unix variants, macOS, and Windows.
+
+2025-03-20 15:37:02,721 - INFO - --------------------------------------------------
+2025-03-20 15:37:10,813 - INFO - User Query: What do you know about libraries in python?
+2025-03-20 15:37:10,814 - INFO - Chatbot Response: Python's standard library is extensive, providing many tools.  It includes built-in modules (coded in C) that give access to system features like file input/output, which would otherwise be unavailable to Python programmers.  It also contains modules written in Python itself, offering solutions to common programming tasks.  Some modules are designed to improve program portability by creating platform-independent APIs.  Windows typically includes the full standard library and often extra components, while Unix-like systems usually offer Python as a set of packages, potentially requiring the use of system packaging tools to get optional parts.  Beyond the standard library, a vast collection of additional components—ranging from individual programs and modules to entire application frameworks—is available through the Python Package Index.
+
+2025-03-20 15:37:10,814 - INFO - --------------------------------------------------
+2025-03-20 15:37:18,702 - INFO - User Query: Is a *.pyd file the same as a DLL?
+2025-03-20 15:37:18,702 - INFO - Chatbot Response: They are similar, but not identical.  A `.pyd` file is a DLL, but it must contain a specific function, and its search path differs from that of a standard DLL.  Also, a `.pyd` file is not required for program execution, unlike a DLL linked to an executable.
+
+2025-03-20 15:37:18,702 - INFO - --------------------------------------------------
+2025-03-20 15:37:28,935 - INFO - User Query: What are lists in python
+2025-03-20 15:37:28,935 - INFO - Chatbot Response: In Python, lists are a type of sequence that can contain items of different types, although typically items are of the same type.  They can be indexed and sliced, similar to strings and other built-in sequence types.  Lists support operations like concatenation.  Unlike strings, which are immutable, lists are mutable; their contents can be changed.  New items can be added to the end of a list using the `append()` method.  When a list is assigned to a variable, the variable refers to the existing list; simple assignment does not create a copy.
+
+2025-03-20 15:37:28,935 - INFO - --------------------------------------------------
+2025-03-20 15:37:43,889 - INFO - User Query: Can you write code for printing a factorial
+2025-03-20 15:37:43,889 - INFO - Chatbot Response: The provided text does not contain code for printing a factorial.
+
+2025-03-20 15:37:43,889 - INFO - --------------------------------------------------
+2025-03-20 15:37:50,439 - INFO - User Query: what is 2+2
+2025-03-20 15:37:50,440 - INFO - Chatbot Response: The provided text focuses on Python programming and does not contain the answer to 2 + 2.
+
+2025-03-20 15:37:50,440 - INFO - --------------------------------------------------
+2025-03-20 15:38:07,543 - INFO - User Query: Answer yes or no are lists mutable?>
+2025-03-20 15:38:07,543 - INFO - Chatbot Response: Yes
+
+2025-03-20 15:38:07,543 - INFO - --------------------------------------------------
