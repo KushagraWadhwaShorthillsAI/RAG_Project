@@ -61,3 +61,53 @@
 2025-03-18 15:31:07,433 - INFO - --------------------------------------------------
 2025-03-18 17:14:27,473 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
 2025-03-18 17:14:30,925 - INFO - 2 prompts are loaded, with the keys: ['query', 'text']
+2025-03-20 15:59:28,595 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 429 Too Many Requests"
+2025-03-20 15:59:28,596 - INFO - Retrying request to /embeddings in 0.391462 seconds
+2025-03-20 15:59:29,605 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 429 Too Many Requests"
+2025-03-20 15:59:29,606 - INFO - Retrying request to /embeddings in 0.988230 seconds
+2025-03-20 15:59:30,949 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 429 Too Many Requests"
+2025-03-20 15:59:30,950 - INFO - Retrying request to /embeddings in 1.745457 seconds
+2025-03-20 15:59:33,904 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 429 Too Many Requests"
+2025-03-20 15:59:33,905 - INFO - Retrying request to /embeddings in 3.163522 seconds
+2025-03-20 15:59:37,373 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 429 Too Many Requests"
+2025-03-20 15:59:37,373 - INFO - Retrying request to /embeddings in 6.785483 seconds
+2025-03-20 16:00:00,018 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 429 Too Many Requests"
+2025-03-20 16:00:00,019 - INFO - Retrying request to /embeddings in 7.793634 seconds
+2025-03-20 16:00:09,538 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 429 Too Many Requests"
+2025-03-20 16:00:09,539 - INFO - Retrying request to /embeddings in 6.594649 seconds
+2025-03-20 16:00:36,679 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 429 Too Many Requests"
+2025-03-20 16:00:36,681 - INFO - Retrying request to /embeddings in 0.421123 seconds
+2025-03-20 16:00:37,805 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 429 Too Many Requests"
+2025-03-20 16:00:37,805 - INFO - Retrying request to /embeddings in 0.971415 seconds
+2025-03-20 16:00:39,542 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 429 Too Many Requests"
+2025-03-20 16:00:39,543 - INFO - Retrying request to /embeddings in 1.979485 seconds
+2025-03-20 16:00:42,295 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 429 Too Many Requests"
+2025-03-20 16:00:42,295 - INFO - Retrying request to /embeddings in 3.862742 seconds
+2025-03-20 16:00:47,127 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 429 Too Many Requests"
+2025-03-20 16:00:47,127 - INFO - Retrying request to /embeddings in 6.927860 seconds
+2025-03-20 16:00:54,857 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 429 Too Many Requests"
+2025-03-20 16:00:54,857 - INFO - Retrying request to /embeddings in 7.273486 seconds
+2025-03-20 16:02:05,511 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-03-20 16:02:10,171 - INFO - 2 prompts are loaded, with the keys: ['query', 'text']
+2025-03-20 16:02:20,455 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_0
+2025-03-20 16:02:20,455 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_1
+2025-03-20 16:02:20,456 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_2
+2025-03-20 16:02:20,456 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_3
+2025-03-20 16:02:20,456 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_4
+2025-03-20 16:02:20,456 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_5
+2025-03-20 16:02:20,456 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_0
+2025-03-20 16:02:20,456 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_1
+2025-03-20 16:02:20,456 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_2
+2025-03-20 16:02:20,456 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_3
+2025-03-20 16:02:20,456 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_4
+2025-03-20 16:02:20,456 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_5
+2025-03-20 16:02:20,456 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_6
+2025-03-20 16:02:20,456 - WARNING - Add of existing embedding ID: 6431bfe272b98867bbafd54afe97dece_7
+2025-03-20 16:02:22,254 - INFO - User Query: How to import modules in python?
+2025-03-20 16:02:22,255 - INFO - Chatbot Response: The provided text describes ways to import modules and customize the import process,  but it does not explain how to perform the import itself.  It mentions that the `runpy` module can execute modules without importing them first, and that `importlib` may be a better alternative in some cases.  Additionally, it notes that the `-m` command line switch allows scripts to be located using the Python module namespace.
+
+2025-03-20 16:02:22,255 - INFO - --------------------------------------------------
+2025-03-20 16:02:35,058 - INFO - User Query: What is Python?
+2025-03-20 16:02:35,059 - INFO - Chatbot Response: Python is an easy-to-learn, powerful programming language with efficient high-level data structures and a simple, effective approach to object-oriented programming.  Its elegant syntax and dynamic typing, along with its interpreted nature, make it ideal for scripting and rapid application development across many areas and platforms.  It's a high-level, general-purpose language applicable to many problem types, and includes a large standard library covering areas like string processing, internet protocols, software engineering, and operating system interfaces.  Beyond object-oriented programming, it supports procedural and functional programming paradigms.  It's also an interpreted, interactive, object-oriented language incorporating modules, exceptions, dynamic typing, high-level dynamic data types, and classes.  It's extensible in C or C++, usable as an extension language for applications needing a programmable interface, and runs on many platforms including Unix variants, macOS, and Windows.
+
+2025-03-20 16:02:35,060 - INFO - --------------------------------------------------
